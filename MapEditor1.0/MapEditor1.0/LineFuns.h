@@ -283,9 +283,6 @@ long RecoverLin(CPoint point,int &num)
 
 				//resultdi//=tempdist//
 			}
-
-
-
 			num=resultLine;
 			resultLine=0;
 			resultL=0;
@@ -321,4 +318,39 @@ long RecoverLin(CPoint point,int &num)
 			return 1;
 		}	
 	}
+}
+
+
+
+//函数功能：判断线连接的方式
+//参数： 线号
+long HowToCon(POINT *v1, POINT * v2,int len1 ,int len2)  
+{
+	int temp=0;
+	int min;
+	int tToh=0;
+	int tTot=0;
+	int hToh=0;
+	int hTot=0;
+	int resultType;
+	tToh=(v1[len1].x-v2[0].x)*(v1[len1].x-v2[0].x)+(v1[len1].y-v2[0].y)*(v1[len1].y-v2[0].y);
+	tTot=(v1[len1].x-v2[len2].x)*(v1[len1].x-v2[len2].x)+(v1[len1].y-v2[len2].y)*(v1[len1].y-v2[len2].y);
+	hToh=(v1[0].x-v2[0].x)*(v1[0].x-v2[0].x)+(v1[0].y-v2[0].y)*(v1[0].y-v2[0].y);
+	hTot=(v1[0].x-v2[len2].x)*(v1[0].x-v2[len2].x)+(v1[0].y-v2[len2].y)*(v1[0].y-v2[len2].y);
+
+	min=tToh,resultType=0;												//尾跟头连
+	if(tTot<min)
+		min=tTot,resultType=1;											//尾跟尾连
+	if(hToh<min)
+		min=hToh,resultType=2;											// 头跟头连
+	if(hTot<min)
+		min=hTot,resultType=3;											// 头跟尾连
+
+
+	return resultType;
+	
+	
+	
+
+
 }
